@@ -4,15 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MyOps</title>
-  <link rel="stylesheet" href="style.css"/>
+
+  <!-- 相対パスで設定（← ここが重要） -->
+  <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- iOS向け A2HS（ホーム追加） -->
+  <!-- iOS向け -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="apple-touch-icon" href="assets/icon-192.png">
 </head>
+
 <body>
   <header>
     <h1>MyOps</h1>
@@ -47,8 +50,7 @@
         </select>
       </label>
       <label class="only-open">
-        <input type="checkbox" id="openOnlyChk" checked />
-        未完のみ
+        <input type="checkbox" id="openOnlyChk" checked /> 未完のみ
       </label>
     </div>
 
@@ -86,11 +88,16 @@
 
     <div id="canvasWrap">
       <canvas id="mapCanvas" width="2000" height="1200"></canvas>
-      <!-- ノード名の直接編集用オーバーレイ -->
       <input id="nodeEditInput" class="editbox" />
     </div>
   </main>
 
   <script src="script.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js");  <!-- ← 相対パス -->
+    }
+  </script>
 </body>
 </html>
+
