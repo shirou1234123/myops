@@ -1,0 +1,108 @@
+:root {
+  --bg: #f6f8fa;
+  --card: #ffffff;
+  --text: #222;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --ring: #93c5fd;
+  --memo: #fffbe6;   /* メモの付箋色 */
+  --sel: #60a5fa;    /* 選択ハイライト */
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+header {
+  padding: 10px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; gap: 12px; justify-content: space-between;
+}
+h1 { margin: 0; font-size: 18px; }
+.tabs { display: flex; gap: 8px; }
+.tabs button {
+  border: 1px solid #d1d5db; background: #fff; height: 32px; padding: 0 12px; border-radius: 999px; cursor: pointer;
+}
+.tabs button.active { background: var(--accent); color:#fff; border-color: var(--accent); }
+
+.view { max-width: 900px; margin: 14px auto; padding: 0 12px; }
+.hidden { display: none; }
+
+.add-row, .filters, .foot-actions, .map-toolbar {
+  background: var(--card);
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: grid; gap: 8px;
+}
+.add-row {
+  grid-template-columns: 1fr 120px 1fr 110px 100px;
+}
+.add-row input, .add-row select, .filters select, .map-toolbar input, .map-toolbar select {
+  height: 36px; padding: 6px 8px;
+  border: 1px solid #d1d5db; border-radius: 8px;
+}
+.add-row input:focus, .add-row select:focus, .filters select:focus, .map-toolbar input:focus, .map-toolbar select:focus {
+  outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--ring);
+}
+
+button {
+  height: 36px; border-radius: 8px; border: 1px solid #d1d5db; background: #fff; cursor: pointer;
+}
+button:hover { background: #f3f4f6; }
+button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+button.primary:hover { filter: brightness(0.95); }
+
+.filters { display: flex; align-items: center; gap: 12px; }
+.only-open { color: var(--muted); font-size: 14px; }
+
+ul { list-style: none; padding: 0; margin: 0; }
+li.task {
+  background: var(--card);
+  border: 1px solid #e5e7eb; border-radius: 10px;
+  padding: 10px;
+  display: grid; grid-template-columns: 28px 1fr auto;
+  align-items: center; gap: 10px; margin-bottom: 8px;
+}
+.task .title { font-weight: 600; }
+.task .meta { color: var(--muted); font-size: 12px; }
+.task .tag { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; border: 1px solid #d1d5db; margin-left: 6px; }
+.task.done .title { text-decoration: line-through; color: #9ca3af; }
+.actions { display: flex; gap: 6px; }
+.actions button { height: 30px; padding: 0 10px; }
+
+/* Map */
+.map-toolbar {
+  display: grid;
+  grid-template-columns: 1fr 110px 1fr 90px 100px 140px 90px 90px 110px 44px 44px 80px 1fr;
+  align-items: center;
+}
+.map-toolbar .hint { color: var(--muted); font-size: 12px; justify-self: end; }
+#canvasWrap {
+  background: #fff;
+  border: 1px solid #e5e7eb; border-radius: 10px;
+  height: calc(100vh - 220px);
+  overflow: hidden; position: relative;
+}
+#mapCanvas { display: block; touch-action: none; } /* iOSでのパンを独自制御 */
+
+/* ノード名編集用のオーバーレイ入力 */
+.editbox{
+  position: absolute;
+  display: none;
+  padding: 4px 6px;
+  border: 1px solid var(--sel);
+  border-radius: 6px;
+  background: #fff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(96,165,250,.25);
+  font-size: 14px;
+}
+
+/* リサイズハンドルの見た目（選択中だけ描画される） → Canvas上で描画。 */

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MyOps</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- iOS向け A2HS（ホーム追加） -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+</head>
+<body>
+  <header>
+    <h1>MyOps</h1>
+    <nav class="tabs">
+      <button id="tabList" class="active">リスト</button>
+      <button id="tabMap">マップ</button>
+    </nav>
+  </header>
+
+  <!-- リストビュー -->
+  <main id="listView" class="view">
+    <div class="add-row">
+      <input id="taskInput" type="text" placeholder="タスクを入力..." />
+      <select id="categorySelect" title="カテゴリ">
+        <option value="">カテゴリ</option>
+        <option>緊急</option>
+        <option>重要</option>
+        <option>通常</option>
+        <option>VMD</option>
+        <option>在庫</option>
+        <option>シフト</option>
+      </select>
+      <input id="newCategoryInput" type="text" placeholder="新規カテゴリ" />
+      <button id="addCategoryBtn">＋カテゴリ</button>
+      <button id="addBtn" class="primary">追加</button>
+    </div>
+
+    <div class="filters">
+      <label>絞り込み：
+        <select id="filterSelect">
+          <option value="all">すべて</option>
+        </select>
+      </label>
+      <label class="only-open">
+        <input type="checkbox" id="openOnlyChk" checked />
+        未完のみ
+      </label>
+    </div>
+
+    <ul id="taskList"></ul>
+
+    <div class="foot-actions">
+      <button id="exportBtn">バックアップ(CSV)</button>
+      <button id="clearDoneBtn">完了を一括削除</button>
+    </div>
+  </main>
+
+  <!-- マップビュー -->
+  <main id="mapView" class="view hidden">
+    <div class="map-toolbar">
+      <input id="newNodeInput" type="text" placeholder="ノード名（自由入力）"/>
+      <button id="addNodeBtn" class="primary">ノード追加</button>
+
+      <select id="taskToNodeSelect" title="タスクから追加">
+        <option value="">タスクから追加</option>
+      </select>
+      <button id="addFromTaskBtn">追加</button>
+
+      <button id="memoAddBtn">メモ追加</button>
+      <button id="linkModeBtn">リンクモード：OFF</button>
+
+      <button id="sizeMinusBtn">サイズ－</button>
+      <button id="sizePlusBtn">サイズ＋</button>
+      <button id="deleteSelBtn">選択削除</button>
+
+      <button id="zoomOutBtn">－</button>
+      <button id="zoomInBtn">＋</button>
+      <button id="resetViewBtn">リセット</button>
+      <span class="hint">操作：ノード/メモをドラッグ、枠でリサイズ、ノード名はダブルクリックで編集</span>
+    </div>
+
+    <div id="canvasWrap">
+      <canvas id="mapCanvas" width="2000" height="1200"></canvas>
+      <!-- ノード名の直接編集用オーバーレイ -->
+      <input id="nodeEditInput" class="editbox" />
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
